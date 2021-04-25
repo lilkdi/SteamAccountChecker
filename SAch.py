@@ -103,9 +103,8 @@ def accountcalc(username, whichthe = 0):
             chrome.quit()
     w8()
 
-
 whichthe = 0
-for username in username:
+for username in unames:
     whichthe += 1
     if reptdlyimpsbl == howmanyentercorly:
         print("Performing Verification...")
